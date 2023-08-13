@@ -1,0 +1,58 @@
+/* palette: https://coolors.co/palette/f72585-b5179e-7209b7-560bad-480ca8-3a0ca3-3f37c9-4361ee-4895ef-4cc9f0 */
+html {
+  --primary: rgba(76, 202, 240, 1);
+  --primary-transparent: rgba(76, 202, 240, 0.33);
+
+  box-sizing: border-box;
+  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  /* TODO decide if this needs to be added back after adding navbar */
+  /* margin-top: 10px; */
+}
+
+/* partially borrowing Tailwind preflight: https://tailwindcss.com/docs/preflight */
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
