@@ -5,4 +5,4 @@ export default function useLayoutOutletContext() {
   return useOutletContext<LayoutOutletContextType>();
 }
 
-// ref: https://reactrouter.com/en/main/hooks/use-outlet-context
+// `useOutletContext` w/ TS: https://reactrouter.com/en/main/hooks/use-outlet-context

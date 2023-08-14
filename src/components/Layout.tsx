@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import axios from '../lib/axiosConfig';
 import { isAxiosError } from 'axios';
 import { Movie, LayoutOutletContextType } from '../common/types';
+import Navbar from './NavBar/Navbar';
 
 export default function Layout() {
   const [movies, setMovies] = React.useState<Movie[]>([]);
@@ -43,7 +44,7 @@ export default function Layout() {
 
   return (
     <>
-      {/* TODO add navbar component */}
+      <Navbar />
       <main>
         <Outlet
           context={[movies, loading, error] satisfies LayoutOutletContextType}

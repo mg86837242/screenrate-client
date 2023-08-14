@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { ThemeOptions, createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+  ThemeOptions,
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from '@mui/material/styles';
 
 const themeOptions: ThemeOptions = {
   palette: {
@@ -22,7 +27,7 @@ const themeOptions: ThemeOptions = {
   },
 };
 
-const theme = createTheme(themeOptions);
+const theme = responsiveFontSizes(createTheme(themeOptions));
 
 export default function ThemeSimpleProvider({
   children,

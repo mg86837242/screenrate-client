@@ -1,15 +1,20 @@
+// NB Emotion's css() method (currently not used in this project) & solution to related linter issues: https://mui.com/material-ui/guides/interoperability/#emotion
+/** @jsxImportSource @emotion/react */
 import './Hero.css';
 import * as React from 'react';
-import { ColorModeContext } from '../../context/Theme';
 import { MoviesProps } from '../../common/types';
-import Carousel from 'react-material-ui-carousel';
-import { Paper, Button, useTheme } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
+import { useTheme, ThemeProvider } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Carousel from 'react-material-ui-carousel';
+import StyledPlayCirCleIcon from './styles';
 
 export default function Hero({ movies }: MoviesProps) {
-  const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -27,21 +32,38 @@ export default function Hero({ movies }: MoviesProps) {
                 <div
                   className='movie-card'
                   style={
-                    // ref: https://stackoverflow.com/questions/52005083/how-to-define-css-variables-in-style-attribute-in-react-and-typescript
+                    // type: https://stackoverflow.com/questions/52005083/how-to-define-css-variables-in-style-attribute-in-react-and-typescript
                     {
                       '--img': `url(${movie.backdrops[0]})`,
                     } as React.CSSProperties
                   }
                 >
                   <div className='movie-detail'>
-                    <div className='movie-poster'>
-                      <img src={movie.poster} alt={movie.title} />
+                    <div className='movie-poster-container'>
+                      <Card>
+                        <CardActionArea>
+                          <CardMedia
+                            component='img'
+                            alt={movie.title}
+                            image={movie.poster}
+                          />
+                        </CardActionArea>
+                      </Card>
                     </div>
-                    <div className='movie-title'>
-                      <h2>{movie.title}</h2>
-                      <p
-                        onClick={colorMode.toggleColorMode}
-                      >{`click me to change mode, currnet mode: "${theme.palette.mode}"`}</p>
+                    <div className='movie-description-container'>
+                      <Typography
+                        variant='h3'
+                        align='center'
+                        gutterBottom
+                        sx={{ fontWeight: 'bold' }}
+                      >
+                        {movie.title}
+                      </Typography>
+                      <Typography paragraph={true} align='center'>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Iusto, ab. Quasi impedit tenetur deserunt a sunt
+                        odit tempore officiis ipsam.
+                      </Typography>
                     </div>
                     <div className='movie-buttons-container'>
                       <div className='play-button-icon-container'>
@@ -50,17 +72,14 @@ export default function Hero({ movies }: MoviesProps) {
                             movie.trailerLink.length - 11,
                           )}`}
                         >
-                          <FontAwesomeIcon
-                            className='play-button-icon'
-                            color='primary'
-                            icon={faCirclePlay}
-                          />
+                          <ThemeProvider theme={theme}>
+                            <StyledPlayCirCleIcon />
+                          </ThemeProvider>
                         </Link>
                       </div>
                       <div className='movie-review-button-container'>
                         <Button
                           variant='contained'
-                          color='info'
                           sx={{
                             bgcolor: 'primary.main',
                             color: 'text.primary',
