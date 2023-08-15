@@ -37,7 +37,12 @@ module.exports = {
     // @see: https://typescript-eslint.io/rules/camelcase & https://typescript-eslint.io/rules/naming-convention
     '@typescript-eslint/naming-convention': [
       'error',
-      { selector: 'variableLike', format: ['camelCase', 'PascalCase'] },
+      {
+        selector: 'variableLike',
+        format: ['camelCase', 'PascalCase'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      },
     ],
   },
   settings: {

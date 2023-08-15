@@ -1,30 +1,26 @@
-// NB Emotion's css() method (currently not used in this project) & solution to related linter issues: https://mui.com/material-ui/guides/interoperability/#emotion
+// NB Emotion's `css()` method (currently not used in this project) & solution to related linter issues: https://mui.com/material-ui/guides/interoperability/#emotion
 /** @jsxImportSource @emotion/react */
-import './Hero.css';
-import * as React from 'react';
-import { MoviesProps } from '../../common/types';
-import { useNavigate, Link } from 'react-router-dom';
-import { useTheme, ThemeProvider } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { ThemeProvider, useTheme } from '@mui/material/styles';
+import * as React from 'react';
 import Carousel from 'react-material-ui-carousel';
+import { Link, useNavigate } from 'react-router-dom';
+import { MoviesProps } from '../../common/types';
+import './Hero.css';
 import StyledPlayCirCleIcon from './styles';
 
 export default function Hero({ movies }: MoviesProps) {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  function handleClickReviews(imdbId: string) {
-    navigate(`/movies/${imdbId}/reviews`);
-  }
-
   return (
     <div className='movie-carousel-container'>
-      <Carousel navButtonsAlwaysVisible={true}>
+      <Carousel navButtonsAlwaysVisible>
         {movies?.map(movie => {
           return (
             <Paper key={movie.imdbId}>
@@ -59,7 +55,7 @@ export default function Hero({ movies }: MoviesProps) {
                       >
                         {movie.title}
                       </Typography>
-                      <Typography paragraph={true} align='center'>
+                      <Typography align='center'>
                         Lorem ipsum, dolor sit amet consectetur adipisicing
                         elit. Iusto, ab. Quasi impedit tenetur deserunt a sunt
                         odit tempore officiis ipsam.
@@ -67,11 +63,7 @@ export default function Hero({ movies }: MoviesProps) {
                     </div>
                     <div className='movie-buttons-container'>
                       <div className='play-button-icon-container'>
-                        <Link
-                          to={`/trailer/${movie.trailerLink.substring(
-                            movie.trailerLink.length - 11,
-                          )}`}
-                        >
+                        <Link to={`/trailer/${movie.trailerLink.slice(32)}`}>
                           <ThemeProvider theme={theme}>
                             <StyledPlayCirCleIcon />
                           </ThemeProvider>
@@ -85,7 +77,9 @@ export default function Hero({ movies }: MoviesProps) {
                             color: 'text.primary',
                             borderRadius: 1,
                           }}
-                          onClick={() => handleClickReviews(movie.imdbId)}
+                          onClick={() =>
+                            navigate(`movies/${movie.imdbId}/reviews`)
+                          }
                         >
                           Reviews
                         </Button>

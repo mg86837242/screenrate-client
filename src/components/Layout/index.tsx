@@ -1,9 +1,10 @@
+import { isAxiosError } from 'axios';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import axios from '../lib/axiosConfig';
-import { isAxiosError } from 'axios';
-import { Movie, LayoutOutletContextType } from '../common/types';
-import Navbar from './NavBar/Navbar';
+import { LayoutOutletContextType, Movie } from '../../common/types';
+import axios from '../../lib/axiosConfig';
+import Navbar from '../Navbar';
+import StyledMain from './styles';
 
 export default function Layout() {
   const [movies, setMovies] = React.useState<Movie[]>([]);
@@ -11,7 +12,7 @@ export default function Layout() {
   const [error, setError] = React.useState<string>('');
 
   React.useEffect(() => {
-    let ignore: boolean = true;
+    let ignore = true;
 
     // axios snippet: https://rb.gy/5pmyk (source: google "axios react typescript example") => NB there's an error in the article - in catch block, use `e.status` instead
     axios
@@ -45,11 +46,11 @@ export default function Layout() {
   return (
     <>
       <Navbar />
-      <main>
+      <StyledMain>
         <Outlet
           context={[movies, loading, error] satisfies LayoutOutletContextType}
         />
-      </main>
+      </StyledMain>
     </>
   );
 }

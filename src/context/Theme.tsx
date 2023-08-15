@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {
   ThemeOptions,
-  alpha,
-  getContrastRatio,
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
@@ -31,38 +29,42 @@ declare module '@mui/material/AppBar' {
   }
 }
 
-const appBarColorBase = '#121212';
-const appBarColorMain = alpha(appBarColorBase, 0.7);
-
 function getDesignTokens(mode: PaletteMode): ThemeOptions {
   return {
     palette: {
+      // https://coolors.co/palette/31393c-2176ff-33a1fd-fdca40-f79824
       mode,
       ...(mode === 'light'
         ? {
             primary: {
-              main: '#4CC9F0',
+              main: '#33A1FD',
             },
             secondary: {
-              main: '#4895EF',
+              main: '#2176FF',
+            },
+            appBar: {
+              main: '#9ad1fe',
+              light: 'rgb(174, 218, 254)',
+              dark: 'rgb(107, 146, 177)',
+              contrastText: 'rgba(0, 0, 0, 0.87)',
             },
           }
         : {
             primary: {
-              main: '#4361EE',
+              main: '#31393C',
             },
             secondary: {
-              main: '#3F37C9',
+              main: '#2176FF',
+            },
+            appBar: {
+              main: '#090B0B',
+              light: 'rgb(58, 59, 59)',
+              dark: 'rgb(6, 7, 7)',
+              contrastText: 'rgba(255, 255, 255)',
             },
           }),
-      appBar: {
-        main: appBarColorMain,
-        light: alpha(appBarColorBase, 0.5),
-        dark: alpha(appBarColorBase, 0.9),
-        contrastText:
-          getContrastRatio(appBarColorMain, '#fff') > 4.5 ? '#fff' : '#111',
-      },
     },
+    spacing: 8,
     typography: {
       fontFamily: ['Quicksand', 'Helvetica', 'Arial', 'sans-serif'].join(','),
       h1: {
@@ -81,7 +83,7 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
   };
 }
 
-export function ColorModeProvider({ children }: { children: React.ReactNode }) {
+export function MUIThemeProvider({ children }: { children: React.ReactNode }) {
   const preferredMode = useMediaQuery('(prefers-color-scheme: dark)')
     ? 'dark'
     : 'light';
@@ -118,13 +120,11 @@ export function ColorModeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
-
-// This project's palette: https://coolors.co/palette/f72585-b5179e-7209b7-560bad-480ca8-3a0ca3-3f37c9-4361ee-4895ef-4cc9f0
 
 // `ThemeOptions` data structure: https://mui.com/material-ui/customization/default-theme/
 
@@ -140,3 +140,5 @@ export function ColorModeProvider({ children }: { children: React.ReactNode }) {
 
 // Toggle color mode: https://mui.com/material-ui/customization/dark-mode/#toggling-color-mode => check the CodeSandbox/StackBlitz
 // Helper function for dual theme options: https://mui.com/material-ui/customization/dark-mode/#dark-mode-with-a-custom-palette => check the CodeSandbox/StackBlitz
+
+// <CssBaseline />: https://mui.com/material-ui/react-css-baseline/

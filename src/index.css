@@ -1,44 +1,37 @@
 html {
-  /* palette: https://coolors.co/palette/f72585-b5179e-7209b7-560bad-480ca8-3a0ca3-3f37c9-4361ee-4895ef-4cc9f0 */
-  --primary: rgba(76, 202, 240, 1);
-  --primary-transparent: rgba(76, 202, 240, 0.33);
-  --secondary: rgba(72, 149, 239, 1);
-  --secondary-transparent: rgba(72, 149, 239, 0.33);
+  /* Palette ref : https://coolors.co/palette/31393c-2176ff-33a1fd-fdca40-f79824 */
+  --primary: rgba(51, 161, 253, 1);
+  --primary-transparent: rgba(51, 161, 253, 0.33);
+  --primary-dark: rgba(49, 57, 60, 1);
+  --primary-dark-transparent: rgba(49, 57, 60, 0.33);
 
-  font-family: 'Quicksand', Arial, Helvetica, sans-serif;
-  background-color: black;
-  box-sizing: border-box;
+  /* MUI <CssBaseline />: https://mui.com/material-ui/react-css-baseline/: */
 }
 
 body {
   /* https://www.freecodecamp.org/news/html-page-width-height/ */
   min-height: 100vh;
+}
 
-  /* https://stackoverflow.com/questions/18548465/prevent-scroll-bar-from-adding-up-to-the-width-of-page-on-chrome */
-  scrollbar-gutter: stable;
+/* Transparent scrollbar for Chromium: https://codepen.io/morgun/pen/qBPJBz (source: google "transparent scrollbar codepen") */
+body ::-webkit-scrollbar {
+  width: 16px;
+}
 
-  /* Transparent scrollbar for Chromium: https://codepen.io/morgun/pen/qBPJBz (source: google "transparent scrollbar codepen") */
-  &::-webkit-scrollbar {
-    width: 16px;
-  }
+body ::-webkit-scrollbar-thumb {
+  border: 5px solid transparent;
+  background-clip: padding-box;
+  padding: 2px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
 
-  &::-webkit-scrollbar-thumb {
-    border: 5px solid transparent;
-    background-clip: padding-box;
-    padding: 2px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.6) !important;
-  }
+body ::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.6) !important;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: black;
-  color: white;
+  overflow: hidden;
 }

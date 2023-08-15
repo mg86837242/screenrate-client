@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './components/Home';
 import Layout from './components/Layout';
-import Home from './components/Home/Home';
-
-import { ColorModeProvider } from './context/Theme';
+import Review from './components/Review';
+import Trailer from './components/Trailer';
+import { MUIThemeProvider } from './context/Theme';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: '*',
+        path: 'trailer/:ytTrailerId',
+        Component: Trailer,
+      },
+      {
+        path: 'movies/:imdbId/reviews',
+        Component: Review,
       },
     ],
   },
@@ -23,11 +29,11 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <ColorModeProvider>
+    <MUIThemeProvider>
       <RouterProvider
         router={router}
         fallbackElement={<p>Initial Load...</p>}
       />
-    </ColorModeProvider>
+    </MUIThemeProvider>
   );
 }

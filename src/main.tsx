@@ -1,7 +1,6 @@
 import './index.css';
 import '@fontsource-variable/quicksand';
 import '@fontsource/poppins';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { StyledEngineProvider } from '@mui/material/styles';

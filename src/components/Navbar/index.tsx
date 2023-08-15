@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { ColorModeContext } from '../../context/Theme';
-import { useTheme } from '@mui/material/styles';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import MenuIcon from '@mui/icons-material/Menu';
+import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -11,13 +12,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { useTheme } from '@mui/material/styles';
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ColorModeContext } from '../../context/Theme';
 
 interface Props {
   /**
@@ -33,6 +33,7 @@ const navItems = ['Home', 'About', 'Contact'];
 export default function DrawerAppBar(props: Props) {
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -84,9 +85,20 @@ export default function DrawerAppBar(props: Props) {
     </Box>
   );
 
+  const renderMobileHamburger = (
+    <IconButton
+      color='inherit'
+      aria-label='open drawer'
+      edge='start'
+      onClick={handleDrawerToggle}
+      sx={{ mr: 2, display: { sm: 'none' } }}
+    >
+      <MenuIcon />
+    </IconButton>
+  );
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <AppBar
         component='nav'
         color='appBar'
@@ -95,44 +107,41 @@ export default function DrawerAppBar(props: Props) {
         sx={{ backgroundImage: 'none' }}
       >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <IconButton
-            color='inherit'
-            aria-label='open drawer'
-            edge='start'
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <MovieFilterIcon
+          {renderMobileHamburger}
+          <Box
             sx={{
               display: { xs: 'none', sm: 'flex' },
-              mr: 1,
-              mb: 0.5,
-              fontSize: '36px',
+              justifyContent: 'flex-start',
+              flex: '33.33%',
             }}
-          />
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map(item => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
+          >
+            <MovieFilterIcon sx={{ fontSize: '40px' }} />
+          </Box>
+          <Box
+            sx={{
+              display: { xs: 'none', sm: 'flex' },
+              justifyContent: 'center',
+              flex: '33.33%',
+            }}
+          >
+            <Button color='inherit' onClick={() => navigate('/')}>
+              Home
+            </Button>
+            <Button color='inherit'>About</Button>
+            <Button color='inherit'>Contact</Button>
           </Box>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
+              justifyContent: 'flex-end',
+              flex: '33.33%',
             }}
           >
-            <Typography>{theme.palette.mode} mode</Typography>
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color='inherit'
-            >
+            <Typography>
+              {theme.palette.mode.replace(/./, char => char.toUpperCase())} Mode
+            </Typography>
+            <IconButton onClick={colorMode.toggleColorMode} color='inherit'>
               {theme.palette.mode === 'dark' ? (
                 <Brightness7Icon />
               ) : (
