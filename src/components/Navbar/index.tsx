@@ -1,7 +1,8 @@
+import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
-import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,11 +13,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+
+import { ReactComponent as Logo } from '../../assets/screen-rate-logo.svg';
 import { ColorModeContext } from '../../context/Theme';
 
 interface Props {
@@ -30,11 +31,10 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-export default function DrawerAppBar(props: Props) {
+export default function DrawerAppBar({ window }: Props) {
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
   const navigate = useNavigate();
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -115,7 +115,7 @@ export default function DrawerAppBar(props: Props) {
               flex: '33.33%',
             }}
           >
-            <MovieFilterIcon sx={{ fontSize: '40px' }} />
+            <Logo />
           </Box>
           <Box
             sx={{

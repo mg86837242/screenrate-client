@@ -1,13 +1,13 @@
 import * as React from 'react';
+import { PaletteMode } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import {
-  ThemeOptions,
   createTheme,
   responsiveFontSizes,
+  ThemeOptions,
   ThemeProvider,
 } from '@mui/material/styles';
-import { PaletteMode } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import CssBaseline from '@mui/material/CssBaseline';
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -37,7 +37,7 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
       ...(mode === 'light'
         ? {
             primary: {
-              main: '#33A1FD',
+              main: '#9ad1fe',
             },
             secondary: {
               main: '#2176FF',
@@ -64,7 +64,7 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
             },
           }),
     },
-    spacing: 8,
+    spacing: 8, // 8px
     typography: {
       fontFamily: ['Quicksand', 'Helvetica', 'Arial', 'sans-serif'].join(','),
       h1: {
@@ -78,6 +78,8 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
       },
       button: {
         fontWeight: 600,
+        fontSize: '1rem',
+        textTransform: 'capitalize',
       },
     },
   };

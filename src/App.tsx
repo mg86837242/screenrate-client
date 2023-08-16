@@ -1,9 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './components/Home';
-import Layout from './components/Layout';
-import Review from './components/Review';
-import Trailer from './components/Trailer';
+
 import { MUIThemeProvider } from './context/Theme';
+import { Home, Layout, Reviews, Trailer } from './components';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'movies/:imdbId/reviews',
-        Component: Review,
+        Component: Reviews,
       },
     ],
   },

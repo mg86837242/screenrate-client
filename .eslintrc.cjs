@@ -8,33 +8,28 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   extends: [
-    // @see: https://eslint.org/docs/latest/rules/
-    'eslint:recommended',
-    // @see: https://typescript-eslint.io/linting/typed-linting
-    'plugin:@typescript-eslint/recommended-type-checked',
-    // @see: https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
-    'plugin:react-hooks/recommended',
-    // @see: https://github.com/jsx-eslint/eslint-plugin-react
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    // @see: https://github.com/prettier/eslint-config-prettier
-    'prettier',
+    'eslint:recommended', // https://eslint.org/docs/latest/rules/
+    'plugin:@typescript-eslint/recommended-type-checked', // https://typescript-eslint.io/linting/typed-linting
+    'plugin:react-hooks/recommended', // https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
+    'plugin:react/recommended', // https://github.com/jsx-eslint/eslint-plugin-react
+    'plugin:react/jsx-runtime', // https://github.com/jsx-eslint/eslint-plugin-react
+    'prettier', // https://github.com/prettier/eslint-config-prettier
   ],
   ignorePatterns: [
     'dist',
     '.eslintrc.cjs',
-    // Unused folders && files:
+    // Personal preference:
     '**/__*/**',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
     // Personal preference:
-    // @see: https://typescript-eslint.io/rules/camelcase & https://typescript-eslint.io/rules/naming-convention
+    // naming convention: https://typescript-eslint.io/rules/camelcase & https://typescript-eslint.io/rules/naming-convention
     '@typescript-eslint/naming-convention': [
       'error',
       {
@@ -44,11 +39,40 @@ module.exports = {
         trailingUnderscore: 'allow',
       },
     ],
+    // `simple-import-sort`: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
   },
+  overrides: [
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ['^react', '^@?\\w'],
+              // Internal packages.
+              ['^(@|components)(/.*|$)'],
+              // Side effect imports.
+              ['^\\u0000'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports.
+              ['^.+\\.?(css)$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
   settings: {
     react: {
-      // @see https://github.com/jsx-eslint/eslint-plugin-react
-      version: 'detect', // React version. "detect" automatically picks the version you have installed.
+      // Linter will throw error text w/o this line: https://github.com/jsx-eslint/eslint-plugin-react
+      version: 'detect',
     },
   },
 };

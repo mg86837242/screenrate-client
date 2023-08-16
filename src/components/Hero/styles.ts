@@ -1,5 +1,5 @@
-import { styled, darken } from '@mui/material/styles';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { darken, styled } from '@mui/material/styles';
 
 const StyledPlayCirCleIcon = styled(PlayCircleIcon)(({ theme }) => ({
   color: theme.palette.primary.main,

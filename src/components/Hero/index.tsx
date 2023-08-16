@@ -1,22 +1,37 @@
-// NB Emotion's `css()` method (currently not used in this project) & solution to related linter issues: https://mui.com/material-ui/guides/interoperability/#emotion
-/** @jsxImportSource @emotion/react */
-import Button from '@mui/material/Button';
+import * as React from 'react';
+import Carousel from 'react-material-ui-carousel';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider, useTheme } from '@mui/material/styles';
-import * as React from 'react';
-import Carousel from 'react-material-ui-carousel';
-import { Link, useNavigate } from 'react-router-dom';
-import { MoviesProps } from '../../common/types';
-import './Hero.css';
+
+import { Movie } from '../../common/movie';
+import BoxFetchError from '../ui/BoxFetchError';
+import BoxIsFetching from '../ui/BoxIsFetching';
+
+import { BtnPrimary } from './../ui/BtnPrimary';
 import StyledPlayCirCleIcon from './styles';
 
-export default function Hero({ movies }: MoviesProps) {
-  const theme = useTheme();
+import './Hero.css';
+
+interface Props {
+  movies: Movie[];
+  isFetching: boolean;
+  error: string;
+}
+
+export default function Hero({ movies, isFetching, error }: Props) {
   const navigate = useNavigate();
+
+  if (isFetching || movies === undefined) {
+    return <BoxIsFetching />;
+  }
+
+  if (error) {
+    return <BoxFetchError error={error} />;
+  }
 
   return (
     <div className='movie-carousel-container'>
@@ -40,7 +55,7 @@ export default function Hero({ movies }: MoviesProps) {
                         <CardActionArea>
                           <CardMedia
                             component='img'
-                            alt={movie.title}
+                            alt={`Poster of ${movie.title}`}
                             image={movie.poster}
                           />
                         </CardActionArea>
@@ -63,26 +78,20 @@ export default function Hero({ movies }: MoviesProps) {
                     </div>
                     <div className='movie-buttons-container'>
                       <div className='play-button-icon-container'>
-                        <Link to={`/trailer/${movie.trailerLink.slice(32)}`}>
-                          <ThemeProvider theme={theme}>
-                            <StyledPlayCirCleIcon />
-                          </ThemeProvider>
-                        </Link>
+                        <StyledPlayCirCleIcon
+                          onClick={() =>
+                            navigate(`/trailer/${movie.trailerLink.slice(32)}`)
+                          }
+                        />
                       </div>
                       <div className='movie-review-button-container'>
-                        <Button
-                          variant='contained'
-                          sx={{
-                            bgcolor: 'primary.main',
-                            color: 'text.primary',
-                            borderRadius: 1,
-                          }}
+                        <BtnPrimary
                           onClick={() =>
                             navigate(`movies/${movie.imdbId}/reviews`)
                           }
                         >
                           Reviews
-                        </Button>
+                        </BtnPrimary>
                       </div>
                     </div>
                   </div>

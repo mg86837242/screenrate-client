@@ -1,6 +1,5 @@
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
-import './Trailer.css';
 import Box from '@mui/material/Box';
 
 const Trailer = () => {
@@ -8,7 +7,7 @@ const Trailer = () => {
 
   return (
     <Box sx={{ height: '90vh' }}>
-      {ytTrailerId != null ? (
+      {ytTrailerId !== null ? (
         <ReactPlayer
           controls={true}
           playing={true}
