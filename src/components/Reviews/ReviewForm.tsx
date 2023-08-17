@@ -20,8 +20,6 @@ interface Props {
   setError: React.Dispatch<React.SetStateAction<string>>;
 }
 
-console.log(import.meta.env.MODE); // TODO remove this after inspection
-
 export default function ReviewForm({
   imdbId,
   reviews,
@@ -120,8 +118,8 @@ export default function ReviewForm({
         />
         <Box display='flex' justifyContent='center' alignItems='center' py={1}>
           <Typography component='legend'>Your rating: </Typography>
-          <Rating
-            name='simple-controlled'
+          <Rating // <Rating /> is <input type='radio'> under the hood
+            name='rating' // this input won't be "controlled" by RHF, despite with the name of 'rating'
             value={ratingValue}
             onChange={(_prevRatingValue, newRatingValue) => {
               setRatingValue(newRatingValue);

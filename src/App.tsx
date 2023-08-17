@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { MUIThemeProvider } from './context/Theme';
+import { MuiThemeProvider } from './context/MuiTheme';
+import TanStackQueryProvider from './context/TanStackQuery';
 import { Home, Layout, Reviews, Trailer } from './components';
 
 const router = createBrowserRouter([
@@ -27,11 +28,13 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <MUIThemeProvider>
-      <RouterProvider
-        router={router}
-        fallbackElement={<p>Initial Load...</p>}
-      />
-    </MUIThemeProvider>
+    <MuiThemeProvider>
+      <TanStackQueryProvider>
+        <RouterProvider
+          router={router}
+          fallbackElement={<p>Initial Load...</p>}
+        />
+      </TanStackQueryProvider>
+    </MuiThemeProvider>
   );
 }

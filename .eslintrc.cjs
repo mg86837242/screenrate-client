@@ -13,7 +13,8 @@ module.exports = {
     'plugin:react-hooks/recommended', // https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
     'plugin:react/recommended', // https://github.com/jsx-eslint/eslint-plugin-react
     'plugin:react/jsx-runtime', // https://github.com/jsx-eslint/eslint-plugin-react
-    'prettier', // https://github.com/prettier/eslint-config-prettier
+    'plugin:@tanstack/eslint-plugin-query/recommended',
+    'prettier',
   ],
   ignorePatterns: [
     'dist',
@@ -22,7 +23,7 @@ module.exports = {
     '**/__*/**',
   ],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'simple-import-sort'],
+  plugins: ['react-refresh', 'simple-import-sort', '@tanstack/query'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',

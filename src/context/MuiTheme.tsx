@@ -85,7 +85,7 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
   };
 }
 
-export function MUIThemeProvider({ children }: { children: React.ReactNode }) {
+export function MuiThemeProvider({ children }: { children: React.ReactNode }) {
   const preferredMode = useMediaQuery('(prefers-color-scheme: dark)')
     ? 'dark'
     : 'light';

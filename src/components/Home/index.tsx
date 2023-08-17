@@ -13,7 +13,7 @@ export default function Home() {
   React.useEffect(() => {
     let ignore = false;
 
-    // axios snippet: https://rb.gy/5pmyk (source: google "axios react typescript example") => NB there's an error in the article - in catch block, use `e.status` instead
+    // `axios` snippet: https://rb.gy/5pmyk (source: google "axios react typescript example") => NB there's an error in the article - in catch block, use `e.status` instead
     api
       .get<Movie[]>(`movies`)
       .then(response => {

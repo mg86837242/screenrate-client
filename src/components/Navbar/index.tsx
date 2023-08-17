@@ -17,7 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { ColorModeContext } from '../../context/Theme';
+import { ColorModeContext } from '../../context/MuiTheme';
 
 import StyledLogo from './styles';
 
