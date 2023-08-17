@@ -28,4 +28,5 @@ __*
 .env
 .env.production
 *.pem
+*.psd
 ecosystem.*

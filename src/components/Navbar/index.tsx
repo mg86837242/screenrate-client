@@ -17,8 +17,9 @@ import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import { ReactComponent as Logo } from '../../assets/screen-rate-logo.svg';
 import { ColorModeContext } from '../../context/Theme';
+
+import StyledLogo from './styles';
 
 interface Props {
   /**
@@ -115,7 +116,7 @@ export default function DrawerAppBar({ window }: Props) {
               flex: '33.33%',
             }}
           >
-            <Logo />
+            <StyledLogo />
           </Box>
           <Box
             sx={{

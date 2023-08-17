@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 import { Movie } from '../../common/movie';
 import BoxFetchError from '../ui/BoxFetchError';
-import BoxIsFetching from '../ui/BoxIsFetching';
+import BoxIsPending from '../ui/BoxIsPending';
 
 import { BtnPrimary } from './../ui/BtnPrimary';
 import StyledPlayCirCleIcon from './styles';
@@ -18,15 +18,15 @@ import './Hero.css';
 
 interface Props {
   movies: Movie[];
-  isFetching: boolean;
+  isPending: boolean;
   error: string;
 }
 
-export default function Hero({ movies, isFetching, error }: Props) {
+export default function Hero({ movies, isPending, error }: Props) {
   const navigate = useNavigate();
 
-  if (isFetching || movies === undefined) {
-    return <BoxIsFetching />;
+  if (isPending || movies === undefined) {
+    return <BoxIsPending />;
   }
 
   if (error) {

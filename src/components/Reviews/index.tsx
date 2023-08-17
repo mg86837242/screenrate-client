@@ -10,7 +10,7 @@ import { Movie } from '../../common/movie';
 import { Review } from '../../common/review';
 import api from '../../lib/axios';
 import BoxFetchError from '../ui/BoxFetchError';
-import BoxIsFetching from '../ui/BoxIsFetching';
+import BoxIsPending from '../ui/BoxIsPending';
 
 import ReviewForm from './ReviewForm';
 import ReviewList from './ReviewList';
@@ -18,7 +18,7 @@ import ReviewList from './ReviewList';
 export default function CenteredElementGrid() {
   const [movie, setMovie] = React.useState<Movie>();
   const [reviews, setReviews] = React.useState<Review[]>([]);
-  const [isFetching, setIsFetching] = React.useState<boolean>(true);
+  const [isPending, setIsPending] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string>('');
 
   const { imdbId } = useParams();
@@ -32,7 +32,7 @@ export default function CenteredElementGrid() {
         if (!ignore) {
           setMovie(response.data);
           setReviews(response.data.reviewIds);
-          setIsFetching(false);
+          setIsPending(false);
         }
       })
       .catch(e => {
@@ -44,10 +44,10 @@ export default function CenteredElementGrid() {
               ? 'Resource not found'
               : 'An unexpected error has occurred';
           setError(message);
-          setIsFetching(false);
+          setIsPending(false);
         } else {
           setError('An unexpected error has occurred');
-          setIsFetching(false);
+          setIsPending(false);
         }
       });
 
@@ -56,8 +56,8 @@ export default function CenteredElementGrid() {
     };
   }, [imdbId]);
 
-  if (isFetching || movie === undefined) {
-    return <BoxIsFetching />;
+  if (isPending || movie === undefined) {
+    return <BoxIsPending />;
   }
 
   if (error) {
@@ -101,7 +101,7 @@ export default function CenteredElementGrid() {
             imdbId={movie.imdbId}
             reviews={reviews}
             setReviews={setReviews}
-            setIsFetching={setIsFetching}
+            setIsPending={setIsPending}
             setError={setError}
           />
           <ReviewList reviews={reviews} />

@@ -16,20 +16,23 @@ interface Props {
   imdbId: string;
   reviews: Review[];
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
-  setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
   setError: React.Dispatch<React.SetStateAction<string>>;
 }
+
+console.log(import.meta.env.MODE); // TODO remove this after inspection
 
 export default function ReviewForm({
   imdbId,
   reviews,
   setReviews,
-  setIsFetching,
+  setIsPending,
   setError,
 }: Props) {
   const initialRatingValue: number | null = null;
   const initialRating: number =
     initialRatingValue == null ? 0 : initialRatingValue;
+
   const [ratingValue, setRatingValue] = React.useState<number | null>(
     initialRatingValue,
   );
@@ -58,10 +61,10 @@ export default function ReviewForm({
               ? 'Resource not found'
               : 'An unexpected error has occurred';
           setError(message);
-          setIsFetching(false);
+          setIsPending(false);
         } else {
           setError('An unexpected error has occurred');
-          setIsFetching(false);
+          setIsPending(false);
         }
       });
   };

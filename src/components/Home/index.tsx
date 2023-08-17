@@ -7,7 +7,7 @@ import Hero from '../Hero';
 
 export default function Home() {
   const [movies, setMovies] = React.useState<Movie[]>([]);
-  const [isFetching, setIsFetching] = React.useState<boolean>(true);
+  const [isPending, setIsPending] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string>('');
 
   React.useEffect(() => {
@@ -19,7 +19,7 @@ export default function Home() {
       .then(response => {
         if (!ignore) {
           setMovies(response.data);
-          setIsFetching(false);
+          setIsPending(false);
         }
       })
       .catch(e => {
@@ -32,10 +32,10 @@ export default function Home() {
               ? 'Resource not found'
               : 'An unexpected error has occurred';
           setError(message);
-          setIsFetching(false);
+          setIsPending(false);
         } else {
           setError('An unexpected error has occurred');
-          setIsFetching(false);
+          setIsPending(false);
         }
       });
 
@@ -44,5 +44,5 @@ export default function Home() {
     };
   }, []);
 
-  return <Hero movies={movies} isFetching={isFetching} error={error} />;
+  return <Hero movies={movies} isPending={isPending} error={error} />;
 }

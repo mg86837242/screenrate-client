@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function BoxIsFetching() {
+export default function BoxIsPending() {
   return (
     <Box
       display='flex'
