@@ -3,6 +3,7 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Rating from '@mui/material/Rating';
 
 import { Review } from '../../common/review';
 import getLocaleString from '../../utils/getLocaleString';
@@ -21,10 +22,11 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
       }}
     >
       {reviews.length > 0 ? (
-        reviews.map((review, idx) => (
+        [...reviews].reverse().map((review, idx) => (
           <React.Fragment key={review.id}>
             {idx > 0 && <Divider variant='middle' component='li' />}
-            <ListItem alignItems='flex-start'>
+            <ListItem alignItems='center' dense disableGutters sx={{ gap: 2 }}>
+              <Rating size='small' value={review.rating} readOnly />
               <ListItemText
                 primary={review.reviewBody}
                 secondary={`Created at: ${getLocaleString(review.createdAt)}`}

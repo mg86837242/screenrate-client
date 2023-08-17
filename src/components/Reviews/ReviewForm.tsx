@@ -1,7 +1,10 @@
+import * as React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { isAxiosError } from 'axios';
 
 import { Review } from '../../common/review';
@@ -24,14 +27,27 @@ export default function ReviewForm({
   setIsFetching,
   setError,
 }: Props) {
-  const { handleSubmit, control, reset } = useForm<AddReview>({
+  const initialRatingValue: number | null = null;
+  const initialRating: number =
+    initialRatingValue == null ? 0 : initialRatingValue;
+  const [ratingValue, setRatingValue] = React.useState<number | null>(
+    initialRatingValue,
+  );
+
+  const { control, handleSubmit, reset, formState } = useForm<AddReview>({
     resolver: zodResolver(addReviewSchema),
-    defaultValues: { reviewBody: '' },
+    defaultValues: {
+      reviewBody: '',
+      rating: initialRating,
+    },
   });
 
   const addReview: SubmitHandler<AddReview> = data => {
     api
-      .post(`/movies/${imdbId}/reviews`, { reviewBody: data.reviewBody })
+      .post(`/movies/${imdbId}/reviews`, {
+        reviewBody: data.reviewBody,
+        rating: ratingValue == null ? 0 : ratingValue,
+      })
       .then(response => setReviews([...reviews, response.data]))
       .catch(e => {
         if (isAxiosError(e)) {
@@ -49,6 +65,13 @@ export default function ReviewForm({
         }
       });
   };
+
+  React.useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      setRatingValue(initialRatingValue);
+      reset({ reviewBody: '', rating: initialRating });
+    }
+  }, [formState, reset, initialRating]);
 
   return (
     <>
@@ -69,20 +92,22 @@ export default function ReviewForm({
           name='reviewBody'
           control={control}
           rules={{ required: true }}
-          render={({ field, fieldState: { error } }) => (
+          render={({ field, fieldState }) => (
             <TextField
-              error={!!error}
-              fullWidth
-              helperText={error?.message && error.message}
+              name={field.name}
+              value={field.value}
+              inputRef={field.ref}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              error={!!fieldState.error}
+              helperText={fieldState.error?.message && fieldState.error.message}
               id='filled-multiline-static'
+              InputLabelProps={{ sx: { color: 'text.primary' } }}
               inputProps={{
                 'aria-label': 'Textarea to input review',
               }}
-              inputRef={field.ref}
               label='Review Text:'
               multiline
-              onBlur={field.onBlur}
-              onChange={field.onChange}
               placeholder='Add your review here ...'
               required
               rows={3}
@@ -90,13 +115,18 @@ export default function ReviewForm({
             />
           )}
         />
-        <BtnPrimaryWFull type='submit' onClick={() => reset()}>
-          Submit
-        </BtnPrimaryWFull>
+        <Box display='flex' justifyContent='center' alignItems='center' py={1}>
+          <Typography component='legend'>Your rating: </Typography>
+          <Rating
+            name='simple-controlled'
+            value={ratingValue}
+            onChange={(_prevRatingValue, newRatingValue) => {
+              setRatingValue(newRatingValue);
+            }}
+          />
+        </Box>
+        <BtnPrimaryWFull type='submit'>Submit</BtnPrimaryWFull>
       </Box>
     </>
   );
 }
-
-// TODO Star system
-// TODO TSQuery
