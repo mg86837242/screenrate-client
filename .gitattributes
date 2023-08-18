@@ -25,7 +25,7 @@
 *.html            text diff=html
 *.inc             text
 *.ini             text
-*.js              text eol=lf # @see: https://eslint.org/docs/latest/rules/linebreak-style#using-this-rule-with-version-control-systems
+*.js              text eol=lf # @see https://eslint.org/docs/latest/rules/linebreak-style#using-this-rule-with-version-control-systems
 *.json            text
 *.jsx             text
 *.less            text

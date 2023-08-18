@@ -8,7 +8,7 @@ import Rating from '@mui/material/Rating';
 import { Review } from '../../common/review';
 import getLocaleString from '../../utils/getLocaleString';
 
-export default function ReviewList({ reviews }: { reviews: Review[] }) {
+export function ReviewList({ reviews }: { reviews: Review[] }) {
   return (
     <List
       sx={{

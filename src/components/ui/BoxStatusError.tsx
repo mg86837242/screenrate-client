@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { BtnPrimary } from './BtnPrimary';
+import { BtnPrimary } from '.';
 
-export default function BoxFetchError({ error }: { error: string }) {
+export function BoxStatusError({ error }: { error: string }) {
   const navigate = useNavigate();
 
   return (

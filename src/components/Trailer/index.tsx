@@ -2,7 +2,7 @@ import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
-const Trailer = () => {
+export function Trailer() {
   const { ytTrailerId } = useParams();
 
   return (
@@ -18,6 +18,4 @@ const Trailer = () => {
       ) : null}
     </Box>
   );
-};
-
-export default Trailer;
+}

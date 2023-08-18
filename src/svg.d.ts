@@ -1,3 +1,6 @@
+/**
+ * @see https://github.com/vitejs/vite/issues/2269
+ */
 declare module '*.svg' {
   import * as React from 'react';
 
@@ -5,5 +8,3 @@ declare module '*.svg' {
     React.SVGProps<SVGSVGElement> & { title?: string }
   >;
 }
-
-// @see: https://github.com/vitejs/vite/issues/2269

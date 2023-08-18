@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 
-import Navbar from '../Navbar';
+import { Navbar } from '..';
 
 import StyledMain from './styles';
 
-export default function Layout() {
+export function Layout() {
   return (
     <>
       <Navbar />

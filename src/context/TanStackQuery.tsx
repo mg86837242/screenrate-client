@@ -10,7 +10,7 @@ const config: QueryClientConfig = {};
 
 const queryClient = new QueryClient(config);
 
-export default function TanStackQueryProvider({
+export function TanStackQueryProvider({
   children,
 }: {
   children: React.ReactNode;

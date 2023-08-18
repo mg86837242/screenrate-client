@@ -10,9 +10,9 @@ const StyledLogo = styled('div')(({ theme }) => ({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundImage:
-    theme.palette.mode === 'dark'
-      ? `url(${darkLogoUrl})`
-      : `url(${lightLogoUrl})`,
+    theme.palette.mode === 'light'
+      ? `url(${lightLogoUrl})`
+      : `url(${darkLogoUrl})`,
 }));
 
 export default StyledLogo;

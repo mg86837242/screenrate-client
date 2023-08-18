@@ -8,30 +8,18 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 import { Movie } from '../../common/movie';
-import BoxFetchError from '../ui/BoxFetchError';
-import BoxIsPending from '../ui/BoxIsPending';
 
-import { BtnPrimary } from './../ui/BtnPrimary';
+import { BtnPrimary } from './../ui';
 import StyledPlayCirCleIcon from './styles';
 
 import './Hero.css';
 
 interface Props {
   movies: Movie[];
-  isPending: boolean;
-  error: string;
 }
 
-export default function Hero({ movies, isPending, error }: Props) {
+export function Hero({ movies }: Props) {
   const navigate = useNavigate();
-
-  if (isPending || movies === undefined) {
-    return <BoxIsPending />;
-  }
-
-  if (error) {
-    return <BoxFetchError error={error} />;
-  }
 
   return (
     <div className='movie-carousel-container'>

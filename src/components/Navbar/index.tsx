@@ -32,7 +32,7 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-export default function DrawerAppBar({ window }: Props) {
+export function Navbar({ window }: Props) {
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -143,10 +143,10 @@ export default function DrawerAppBar({ window }: Props) {
               {theme.palette.mode.replace(/./, char => char.toUpperCase())} Mode
             </Typography>
             <IconButton onClick={colorMode.toggleColorMode} color='inherit'>
-              {theme.palette.mode === 'dark' ? (
-                <Brightness7Icon />
-              ) : (
+              {theme.palette.mode === 'light' ? (
                 <Brightness4Icon />
+              ) : (
+                <Brightness7Icon />
               )}
             </IconButton>
           </Box>

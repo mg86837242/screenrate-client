@@ -1,6 +1,7 @@
-export { default as Hero } from './Hero';
-export { default as Home } from './Home';
-export { default as Layout } from './Layout';
-export { default as Navbar } from './Navbar';
-export { default as Reviews } from './Reviews';
-export { default as Trailer } from './Trailer';
+export * from './Hero';
+export * from './Home';
+export * from './Layout';
+export * from './Navbar';
+export * from './Reviews';
+export * from './Trailer';
+export * from './ui';

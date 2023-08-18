@@ -86,16 +86,14 @@ function getDesignTokens(mode: PaletteMode): ThemeOptions {
 }
 
 export function MuiThemeProvider({ children }: { children: React.ReactNode }) {
-  const preferredMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const systemMode = useMediaQuery('(prefers-color-scheme: dark)')
     ? 'dark'
     : 'light';
   const storedMode = localStorage.getItem(
     `${import.meta.env.VITE_APP_NAME}-color-mode`,
   );
   const defaultMode =
-    storedMode === 'dark' || storedMode === 'light'
-      ? storedMode
-      : preferredMode;
+    storedMode === 'dark' || storedMode === 'light' ? storedMode : systemMode;
 
   const [mode, setMode] = React.useState<'light' | 'dark'>(defaultMode);
 

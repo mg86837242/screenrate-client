@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -5,28 +6,23 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { isAxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Review } from '../../common/review';
 import { AddReview, addReviewSchema } from '../../common/review';
-import api from '../../lib/axios';
-import { BtnPrimaryWFull } from '../ui/BtnPrimary';
+import { addReviewByImdbId } from '../../lib/axios';
+import { BtnPrimaryWFull } from '..';
 
 interface Props {
   imdbId: string;
-  reviews: Review[];
-  setReviews: React.Dispatch<React.SetStateAction<Review[]>>;
-  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
-  setError: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ReviewForm({
-  imdbId,
-  reviews,
-  setReviews,
-  setIsPending,
-  setError,
-}: Props) {
+export function ReviewForm({ imdbId }: Props) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: addReviewByImdbId(imdbId),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['movie'] }),
+  });
+
   const initialRatingValue: number | null = null;
   const initialRating: number =
     initialRatingValue == null ? 0 : initialRatingValue;
@@ -44,27 +40,10 @@ export default function ReviewForm({
   });
 
   const addReview: SubmitHandler<AddReview> = data => {
-    api
-      .post(`/movies/${imdbId}/reviews`, {
-        reviewBody: data.reviewBody,
-        rating: ratingValue == null ? 0 : ratingValue,
-      })
-      .then(response => setReviews([...reviews, response.data]))
-      .catch(e => {
-        if (isAxiosError(e)) {
-          const message =
-            e.code === 'ECONNABORTED'
-              ? 'A timeout has occurred'
-              : e.status === 404
-              ? 'Resource not found'
-              : 'An unexpected error has occurred';
-          setError(message);
-          setIsPending(false);
-        } else {
-          setError('An unexpected error has occurred');
-          setIsPending(false);
-        }
-      });
+    mutation.mutate({
+      reviewBody: data.reviewBody,
+      rating: ratingValue === null ? 0 : ratingValue,
+    });
   };
 
   React.useEffect(() => {
@@ -74,6 +53,7 @@ export default function ReviewForm({
     }
   }, [formState, reset, initialRating]);
 
+  // TODO re-import raw dataset, modify reviews and export a backup (both movies and reviews collections) && optimistic ui
   return (
     <>
       <Box
@@ -126,7 +106,9 @@ export default function ReviewForm({
             }}
           />
         </Box>
-        <BtnPrimaryWFull type='submit'>Submit</BtnPrimaryWFull>
+        <BtnPrimaryWFull type='submit' disabled={mutation.isPending}>
+          Submit
+        </BtnPrimaryWFull>
       </Box>
     </>
   );

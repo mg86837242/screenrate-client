@@ -40,6 +40,7 @@ module.exports = {
         trailingUnderscore: 'allow',
       },
     ],
+    '@typescript-eslint/no-unused-vars': 0,
     // `simple-import-sort`: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
     'simple-import-sort/imports': 'warn',
     'simple-import-sort/exports': 'warn',
