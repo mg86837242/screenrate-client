@@ -8,6 +8,10 @@ export function BoxStatusPending() {
       justifyContent='center'
       alignItems='center'
       height='85vh'
+      role='alert'
+      aria-live='polite'
+      aria-busy={true}
+      aria-label='Loading'
     >
       <CircularProgress size='4rem' />
     </Box>

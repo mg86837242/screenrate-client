@@ -15,6 +15,9 @@ export function BoxStatusError({ error }: { error: string }) {
       alignItems='center'
       gap='2rem'
       height='85vh'
+      role='alert'
+      aria-live='assertive'
+      aria-label='Error message'
     >
       <Typography>{error}</Typography>
       <BtnPrimary onClick={() => navigate(``)}>Go Home</BtnPrimary>

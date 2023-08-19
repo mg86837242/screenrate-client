@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import invariant from 'tiny-invariant';
 
 export function useTypedParams<T extends string>(
-  paramNames: T[],
+  ...paramNames: T[]
 ): Record<T, string> {
   const params = useParams();
   const initialTypedParams: Record<string, string> = {};

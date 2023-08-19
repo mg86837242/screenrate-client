@@ -31,7 +31,7 @@ export async function getMovieByImdbId(imdbId: string): Promise<Movie> {
   }
 }
 export function addReviewByImdbId(imdbId: string) {
-  return async function (newReview: AddReview) {
+  return async function (newReview: AddReview): Promise<void> {
     try {
       await api.post(`/movies/${imdbId}/reviews`, {
         reviewBody: newReview.reviewBody,

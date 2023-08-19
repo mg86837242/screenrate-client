@@ -2,9 +2,11 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Unstable_Grid2';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
 import { useMovie } from '../../hooks';
+import { addReviewByImdbId } from '../../lib/axios';
 import { BoxStatusError } from '..';
 import { BoxStatusPending } from '..';
 
@@ -12,10 +14,21 @@ import { ReviewForm } from './ReviewForm';
 import { ReviewList } from './ReviewList';
 
 export function Reviews() {
-  const { imdbId } = useTypedParams(['imdbId']);
-  const { status, data: movie, error } = useMovie(imdbId);
+  const queryClient = useQueryClient();
+  const { imdbId } = useTypedParams('imdbId');
+  const {
+    status,
+    data: movie,
+    error,
+    isFetching,
+  } = useMovie(queryClient, imdbId);
 
-  return !imdbId || status === 'pending' ? (
+  const addReviewMutation = useMutation({
+    mutationFn: addReviewByImdbId(imdbId),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['movie'] }),
+  });
+
+  return status === 'pending' ? (
     <BoxStatusPending />
   ) : status === 'error' ? (
     <BoxStatusError error={error.message} />
@@ -52,8 +65,12 @@ export function Reviews() {
           justifyContent='center'
           alignItems='center'
         >
-          <ReviewForm imdbId={movie.imdbId} />
-          <ReviewList reviews={movie.reviewIds} />
+          <ReviewForm addReviewMutation={addReviewMutation} />
+          <ReviewList
+            addReviewMutation={addReviewMutation}
+            reviews={movie.reviewIds}
+            isFetching={isFetching}
+          />
         </Grid>
       </Grid>
     </Box>

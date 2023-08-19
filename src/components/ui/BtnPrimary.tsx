@@ -6,9 +6,18 @@ interface Props {
   type?: 'button' | 'submit';
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   disabled?: boolean;
+  width?: string;
+  height?: string;
 }
 
-export function BtnPrimary({ children, type, onClick, disabled }: Props) {
+export function BtnPrimary({
+  children,
+  type,
+  onClick,
+  disabled,
+  width,
+  height,
+}: Props) {
   return (
     <Button
       type={type || 'button'}
@@ -17,25 +26,8 @@ export function BtnPrimary({ children, type, onClick, disabled }: Props) {
       variant='contained'
       color='primary'
       sx={{
-        color: 'text.primary',
-        borderRadius: 1,
-      }}
-    >
-      {children}
-    </Button>
-  );
-}
-
-export function BtnPrimaryWFull({ children, type, onClick, disabled }: Props) {
-  return (
-    <Button
-      type={type || 'button'}
-      onClick={onClick}
-      disabled={disabled || false}
-      variant='contained'
-      color='primary'
-      fullWidth
-      sx={{
+        width,
+        height,
         color: 'text.primary',
         borderRadius: 1,
       }}

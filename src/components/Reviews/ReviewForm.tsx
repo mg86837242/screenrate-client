@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,23 +5,24 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutationResult } from '@tanstack/react-query';
 
 import { AddReview, addReviewSchema } from '../../common/review';
-import { addReviewByImdbId } from '../../lib/axios';
-import { BtnPrimaryWFull } from '..';
+import { BtnPrimary } from '..';
 
 interface Props {
-  imdbId: string;
+  addReviewMutation: UseMutationResult<
+    void,
+    Error,
+    {
+      reviewBody: string;
+      rating: number;
+    },
+    unknown
+  >;
 }
 
-export function ReviewForm({ imdbId }: Props) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: addReviewByImdbId(imdbId),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['movie'] }),
-  });
-
+export function ReviewForm({ addReviewMutation }: Props) {
   const initialRatingValue: number | null = null;
   const initialRating: number =
     initialRatingValue == null ? 0 : initialRatingValue;
@@ -40,7 +40,7 @@ export function ReviewForm({ imdbId }: Props) {
   });
 
   const addReview: SubmitHandler<AddReview> = data => {
-    mutation.mutate({
+    addReviewMutation.mutate({
       reviewBody: data.reviewBody,
       rating: ratingValue === null ? 0 : ratingValue,
     });
@@ -53,7 +53,6 @@ export function ReviewForm({ imdbId }: Props) {
     }
   }, [formState, reset, initialRating]);
 
-  // TODO re-import raw dataset, modify reviews and export a backup (both movies and reviews collections) && optimistic ui
   return (
     <>
       <Box
@@ -99,16 +98,20 @@ export function ReviewForm({ imdbId }: Props) {
         <Box display='flex' justifyContent='center' alignItems='center' py={1}>
           <Typography component='legend'>Your rating: </Typography>
           <Rating // <Rating /> is <input type='radio'> under the hood
-            name='rating' // this input won't be "controlled" by RHF, despite with the name of 'rating'
+            name='rating' // this input is controlled by a state variable i/o of React Hook Form
             value={ratingValue}
             onChange={(_prevRatingValue, newRatingValue) => {
               setRatingValue(newRatingValue);
             }}
           />
         </Box>
-        <BtnPrimaryWFull type='submit' disabled={mutation.isPending}>
+        <BtnPrimary
+          type='submit'
+          disabled={addReviewMutation.isPending}
+          width='100%'
+        >
           Submit
-        </BtnPrimaryWFull>
+        </BtnPrimary>
       </Box>
     </>
   );

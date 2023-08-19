@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 import { Movie } from '../../common/movie';
 
-import { BtnPrimary } from './../ui';
+import { BtnPrimary } from './..';
 import StyledPlayCirCleIcon from './styles';
 
 import './Hero.css';
