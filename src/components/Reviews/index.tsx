@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
 import { useAddReview, useMovie } from '../../lib';
-import { ErrorPage } from '..';
+import { ErrorPage, NotFound } from '..';
 import { PendingPage } from '..';
 
 import { ReviewForm } from './ReviewForm';
@@ -30,7 +30,7 @@ export function Reviews() {
     <ErrorPage error={error.message} />
   ) : (
     <Box sx={{ flexGrow: 1, padding: { xs: 4, md: 6 } }}>
-      <Grid container spacing={{ xs: 4, md: 6 }}>
+      <Grid container spacing={{ xs: 4, md: 3 }}>
         <Grid
           xs={12}
           md={6}

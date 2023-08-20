@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         Component: Trailer,
       },
       {
-        path: 'movies/:imdbId/reviews',
+        path: 'movies/:imdbId',
         Component: Reviews,
       },
       {

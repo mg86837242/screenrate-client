@@ -40,7 +40,9 @@ export function Hero({ movies }: Props) {
                   <div className='movie-detail'>
                     <div className='movie-poster-container'>
                       <Card>
-                        <CardActionArea>
+                        <CardActionArea
+                          onClick={() => navigate(`movies/${movie.imdbId}`)}
+                        >
                           <CardMedia
                             component='img'
                             alt={`Poster of ${movie.title}`}
@@ -74,9 +76,7 @@ export function Hero({ movies }: Props) {
                       </div>
                       <div className='movie-review-button-container'>
                         <BtnPrimary
-                          onClick={() =>
-                            navigate(`movies/${movie.imdbId}/reviews`)
-                          }
+                          onClick={() => navigate(`movies/${movie.imdbId}`)}
                         >
                           Reviews
                         </BtnPrimary>

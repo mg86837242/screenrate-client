@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-import { ReactComponent as Illustration } from '../../assets/404-page-not-found-cropped.svg';
+import { ReactComponent as Illustration } from '../../assets/404-page-not-found.svg';
 
 import { BtnPrimary } from './BtnPrimary';
 

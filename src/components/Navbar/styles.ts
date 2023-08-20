@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 
-import darkLogoUrl from '../../assets/screen-rate-logo-dark.svg';
-import lightLogoUrl from '../../assets/screen-rate-logo-light.svg';
+import darkLogoUrl from '../../assets/screenrate-logo-dark.svg';
+import lightLogoUrl from '../../assets/screenrate-logo-light.svg';
 
 const StyledLogo = styled('div')(({ theme }) => ({
   width: '87px',
