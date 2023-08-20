@@ -2,11 +2,10 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
-import { useMovie } from '../../hooks';
-import { addReviewByImdbId } from '../../lib/axios';
+import { useAddReview, useMovie } from '../../lib';
 import { BoxStatusError } from '..';
 import { BoxStatusPending } from '..';
 
@@ -23,10 +22,7 @@ export function Reviews() {
     isFetching,
   } = useMovie(queryClient, imdbId);
 
-  const addReviewMutation = useMutation({
-    mutationFn: addReviewByImdbId(imdbId),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['movie'] }),
-  });
+  const addReviewMutation = useAddReview(queryClient, imdbId);
 
   return status === 'pending' ? (
     <BoxStatusPending />

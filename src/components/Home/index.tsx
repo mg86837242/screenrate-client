@@ -1,4 +1,4 @@
-import { useMovies } from '../../hooks';
+import { useMovies } from '../../lib';
 import { BoxStatusError } from '..';
 import { BoxStatusPending } from '..';
 import { Hero } from '..';

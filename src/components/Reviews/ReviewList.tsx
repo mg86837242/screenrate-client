@@ -8,8 +8,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Rating from '@mui/material/Rating';
 import { UseMutationResult } from '@tanstack/react-query';
 
-import { Review } from '../../common/review';
-import getLocaleString from '../../utils/getLocaleString';
+import { Review } from '../../common';
+import { getLocaleString } from '../../utils';
 import { BtnPrimary } from '..';
 
 interface Props {

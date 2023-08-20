@@ -1,13 +1,5 @@
 import { z } from 'zod';
 
-export interface Review {
-  id: string;
-  reviewBody: string;
-  rating: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
 export const reviewSchema = z.object({
   id: z.string().min(1, { message: 'Required' }),
   reviewBody: z
@@ -26,5 +18,3 @@ export const addReviewSchema = z.object({
     .max(200, { message: 'Maximum 200 characters' }),
   rating: z.number(),
 });
-
-export type AddReview = z.infer<typeof addReviewSchema>;

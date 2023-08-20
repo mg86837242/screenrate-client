@@ -1,18 +1,6 @@
 import { z } from 'zod';
 
-import { Review, reviewSchema } from './review';
-
-export interface Movie {
-  id: string;
-  imdbId: string;
-  title: string;
-  releaseDate: string;
-  trailerLink: string;
-  genre: string[];
-  poster: string;
-  backdrops: string[];
-  reviewIds: Review[];
-}
+import { reviewSchema } from './review';
 
 export const movieSchema = {
   id: z.string().min(1, { message: 'Required' }),

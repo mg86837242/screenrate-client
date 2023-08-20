@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { MuiThemeProvider } from './context/MuiTheme';
-import { TanStackQueryProvider } from './context/TanStackQuery';
 import { Home, Layout, Reviews, Trailer } from './components';
+import { MuiThemeProvider, TanStackQueryProvider } from './context';
 
 const router = createBrowserRouter([
   {

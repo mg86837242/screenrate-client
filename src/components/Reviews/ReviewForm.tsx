@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { UseMutationResult } from '@tanstack/react-query';
 
-import { AddReview, addReviewSchema } from '../../common/review';
+import { AddReview, addReviewSchema } from '../../common';
 import { BtnPrimary } from '..';
 
 interface Props {

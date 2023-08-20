@@ -1,4 +1,4 @@
-export default function getLocaleString(date: Date): string {
+export function getLocaleString(date: Date): string {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',

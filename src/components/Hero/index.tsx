@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-import { Movie } from '../../common/movie';
+import { Movie } from '../../common';
 
 import { BtnPrimary } from './..';
 import StyledPlayCirCleIcon from './styles';
