@@ -70,13 +70,19 @@ export function Hero({ movies }: Props) {
                       <div className='play-button-icon-container'>
                         <StyledPlayCirCleIcon
                           onClick={() =>
-                            navigate(`/trailer/${movie.trailerLink.slice(32)}`)
+                            navigate(
+                              `movies/${
+                                movie.imdbId
+                              }/trailer/${movie.trailerLink.slice(32)}`,
+                            )
                           }
                         />
                       </div>
                       <div className='movie-review-button-container'>
                         <BtnPrimary
-                          onClick={() => navigate(`movies/${movie.imdbId}`)}
+                          onClick={() =>
+                            navigate(`movies/${movie.imdbId}/reviews`)
+                          }
                         >
                           Reviews
                         </BtnPrimary>

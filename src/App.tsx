@@ -24,12 +24,12 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: 'trailer/:ytTrailerId',
-        Component: Trailer,
+        path: 'movies/:imdbId/reviews',
+        Component: Reviews,
       },
       {
-        path: 'movies/:imdbId',
-        Component: Reviews,
+        path: 'movies/:imdbId/trailer/:ytTrailerId',
+        Component: Trailer,
       },
       {
         path: '*',

@@ -1,9 +1,10 @@
 import ReactPlayer from 'react-player';
-import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
+import { useTypedParams } from '../../hooks';
+
 export function Trailer() {
-  const { ytTrailerId } = useParams();
+  const { ytTrailerId } = useTypedParams('ytTrailerId');
 
   return (
     <Box sx={{ height: '90vh' }}>
