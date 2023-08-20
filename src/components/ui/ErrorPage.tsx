@@ -4,17 +4,17 @@ import Typography from '@mui/material/Typography';
 
 import { BtnPrimary } from './BtnPrimary';
 
-export function BoxStatusError({ error }: { error: string }) {
+export function ErrorPage({ error }: { error: string }) {
   const navigate = useNavigate();
 
   return (
     <Box
+      flex='1 0 100%'
       display='flex'
       flexDirection='column'
       justifyContent='center'
       alignItems='center'
       gap='2rem'
-      height='85vh'
       role='alert'
       aria-live='assertive'
       aria-label='Error message'

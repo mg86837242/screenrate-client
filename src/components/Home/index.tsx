@@ -1,15 +1,15 @@
 import { useMovies } from '../../lib';
-import { BoxStatusError } from '..';
-import { BoxStatusPending } from '..';
+import { ErrorPage } from '..';
+import { PendingPage } from '..';
 import { Hero } from '..';
 
 export function Home() {
   const { status, data: movies, error } = useMovies();
 
   return status === 'pending' ? (
-    <BoxStatusPending />
+    <PendingPage />
   ) : status === 'error' ? (
-    <BoxStatusError error={error.message} />
+    <ErrorPage error={error.message} />
   ) : (
     <Hero movies={movies} />
   );

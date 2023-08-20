@@ -6,8 +6,8 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
 import { useAddReview, useMovie } from '../../lib';
-import { BoxStatusError } from '..';
-import { BoxStatusPending } from '..';
+import { ErrorPage } from '..';
+import { PendingPage } from '..';
 
 import { ReviewForm } from './ReviewForm';
 import { ReviewList } from './ReviewList';
@@ -25,12 +25,12 @@ export function Reviews() {
   const addReviewMutation = useAddReview(queryClient, imdbId);
 
   return status === 'pending' ? (
-    <BoxStatusPending />
+    <PendingPage />
   ) : status === 'error' ? (
-    <BoxStatusError error={error.message} />
+    <ErrorPage error={error.message} />
   ) : (
-    <Box sx={{ flexGrow: 1, padding: { xs: '1rem', md: '3rem' } }}>
-      <Grid container spacing={{ xs: 2, md: 3 }}>
+    <Box sx={{ flexGrow: 1, padding: { xs: 4, md: 6 } }}>
+      <Grid container spacing={{ xs: 4, md: 6 }}>
         <Grid
           xs={12}
           md={6}
@@ -54,7 +54,7 @@ export function Reviews() {
           </Card>
         </Grid>
         <Grid
-          xs={4}
+          xs={12}
           md={6}
           display='flex'
           flexDirection='column'
