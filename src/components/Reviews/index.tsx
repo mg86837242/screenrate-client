@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
 import { useAddReview, useMovie } from '../../lib';
-import { ErrorPage } from '..';
+import { ErrorPage, NotFound } from '..';
 import { PendingPage } from '..';
 
 import { ReviewForm } from './ReviewForm';

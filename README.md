@@ -39,15 +39,11 @@ Navigate to the http://localhost:5173, if using the Vite's default port number
 ## Technology Highlights
 
 - MongoDB
-- Java
 - Spring Boot
-- TypeScript
 - React
+- TypeScript
 - Material UI
-- Styled Components
 - Axios
-- TanStack/React Query
-- React Router
 
 ## Credit
 
