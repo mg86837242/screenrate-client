@@ -1,10 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+
+import { ReactComponent as Illustration } from '../../assets/404-page-not-found-cropped.svg';
 
 import { BtnPrimary } from './BtnPrimary';
 
-export function BoxStatusError({ error }: { error: string }) {
+const StyledIllustration = styled(Illustration)(({ theme }) => ({
+  width: '20rem',
+  role: 'img',
+  ariaLabel: '404',
+
+  [theme.breakpoints.up('sm')]: {
+    width: '35rem',
+  },
+}));
+
+export function NotFound() {
   const navigate = useNavigate();
 
   return (
@@ -17,9 +30,10 @@ export function BoxStatusError({ error }: { error: string }) {
       height='85vh'
       role='alert'
       aria-live='assertive'
-      aria-label='Error message'
+      aria-label='Page not found error message'
     >
-      <Typography>{error}</Typography>
+      <StyledIllustration />
+      <Typography variant='h3'>Page Not Found</Typography>
       <BtnPrimary onClick={() => navigate(``)}>Go Home</BtnPrimary>
     </Box>
   );

@@ -1,7 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  QueryClient,
+  QueryClientConfig,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { Home, Layout, Reviews, Trailer } from './components';
-import { MuiThemeProvider, TanStackQueryProvider } from './context';
+import { Home, Layout, NotFound, Reviews, Trailer } from './components';
+import { MuiThemeProvider } from './context';
+
+const config: QueryClientConfig = {};
+
+const queryClient = new QueryClient(config);
 
 const router = createBrowserRouter([
   {
@@ -21,6 +31,10 @@ const router = createBrowserRouter([
         path: 'movies/:imdbId/reviews',
         Component: Reviews,
       },
+      {
+        path: '*',
+        Component: NotFound,
+      },
     ],
   },
 ]);
@@ -28,12 +42,13 @@ const router = createBrowserRouter([
 export function App() {
   return (
     <MuiThemeProvider>
-      <TanStackQueryProvider>
+      <QueryClientProvider client={queryClient}>
         <RouterProvider
           router={router}
           fallbackElement={<p>Initial Load...</p>}
         />
-      </TanStackQueryProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </MuiThemeProvider>
   );
 }

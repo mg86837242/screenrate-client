@@ -4,7 +4,7 @@ import { Movie } from '../../common';
 import { getApiErrorMessage } from '../../utils';
 import { api } from '..';
 
-export async function getMovieByImdbId(imdbId: string): Promise<Movie> {
+async function getMovieByImdbId(imdbId: string): Promise<Movie> {
   try {
     const response = await api.get<Movie>(`movies/${imdbId}`);
     return response.data;

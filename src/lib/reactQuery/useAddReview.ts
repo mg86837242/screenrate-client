@@ -4,7 +4,7 @@ import { AddReview } from '../../common';
 import { getApiErrorMessage } from '../../utils';
 import { api } from '..';
 
-export const addReviewByImdbId =
+const addReviewByImdbId =
   (imdbId: string) =>
   async (newReview: AddReview): Promise<void> => {
     try {

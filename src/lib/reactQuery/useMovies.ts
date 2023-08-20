@@ -4,7 +4,7 @@ import { Movie } from '../../common';
 import { getApiErrorMessage } from '../../utils';
 import { api } from '..';
 
-export async function getMovies(): Promise<Movie[]> {
+async function getMovies(): Promise<Movie[]> {
   try {
     const response = await api.get<Movie[]>(`movies`);
     return response.data;

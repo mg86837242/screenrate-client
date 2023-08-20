@@ -30,9 +30,9 @@ export function Reviews() {
     <BoxStatusError error={error.message} />
   ) : (
     <Box sx={{ flexGrow: 1, padding: { xs: '1rem', md: '3rem' } }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }}>
         <Grid
-          xs={4}
+          xs={12}
           md={6}
           display='flex'
           justifyContent='center'

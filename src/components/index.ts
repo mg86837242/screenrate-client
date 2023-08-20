@@ -13,3 +13,4 @@ export * from './Trailer';
 export * from './ui/BoxStatusError';
 export * from './ui/BoxStatusPending';
 export * from './ui/BtnPrimary';
+export * from './ui/NotFound';
