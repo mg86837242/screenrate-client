@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { Home, Layout, NotFound, Reviews, Trailer } from './components';
+import { Layout, NotFound, Trailer } from './components';
 import { MuiThemeProvider } from './context';
 
 const config: QueryClientConfig = {};
@@ -21,11 +21,25 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        async loader() {
+          const { loader } = await import('./components/Home/loader');
+          return loader(queryClient);
+        },
+        async lazy() {
+          const { Home } = await import('./components/Home');
+          return { Component: Home };
+        },
       },
       {
         path: 'movies/:imdbId/reviews',
-        Component: Reviews,
+        async loader({ request, params }) {
+          const { loader } = await import('./components/Reviews/loader');
+          return loader(queryClient)({ request, params });
+        },
+        async lazy() {
+          const { Reviews } = await import('./components/Reviews');
+          return { Component: Reviews };
+        },
       },
       {
         path: 'movies/:imdbId/trailer/:ytTrailerId',

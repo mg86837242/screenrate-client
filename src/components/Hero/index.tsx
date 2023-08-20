@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Carousel from 'react-material-ui-carousel';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
@@ -68,15 +68,13 @@ export function Hero({ movies }: Props) {
                     </div>
                     <div className='movie-buttons-container'>
                       <div className='play-button-icon-container'>
-                        <StyledPlayCirCleIcon
-                          onClick={() =>
-                            navigate(
-                              `movies/${
-                                movie.imdbId
-                              }/trailer/${movie.trailerLink.slice(32)}`,
-                            )
-                          }
-                        />
+                        <RouterLink
+                          to={`movies/${
+                            movie.imdbId
+                          }/trailer/${movie.trailerLink.slice(32)}`}
+                        >
+                          <StyledPlayCirCleIcon />
+                        </RouterLink>
                       </div>
                       <div className='movie-review-button-container'>
                         <BtnPrimary

@@ -1,5 +1,3 @@
-import { FetchQueryOptions, UseQueryOptions } from '@tanstack/react-query';
-
 import { Movie } from '../../common';
 import { api } from '..';
 
@@ -8,7 +6,7 @@ async function getMovies(): Promise<Movie[]> {
   return response.data;
 }
 
-export const moviesQuery: FetchQueryOptions | UseQueryOptions = {
+export const moviesQuery = {
   queryKey: ['movies'],
-  queryFn: getMovies,
+  queryFn: () => getMovies(),
 };

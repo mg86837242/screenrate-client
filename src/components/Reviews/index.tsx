@@ -1,32 +1,42 @@
+import { useLoaderData } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useTypedParams } from '../../hooks';
-import { useAddReview, useMovie } from '../../lib';
+import { movieByImdbIdQuery, useAddReview } from '../../lib';
 import { ErrorPage } from '..';
 import { PendingPage } from '..';
 
+import { loader } from './loader';
 import { ReviewForm } from './ReviewForm';
 import { ReviewList } from './ReviewList';
 
 export function Reviews() {
-  const queryClient = useQueryClient();
+  const initialData = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof loader>>
+  >;
   const { imdbId } = useTypedParams('imdbId');
   const {
-    status,
+    isPending,
+    isError,
     data: movie,
     error,
     isFetching,
-  } = useMovie(queryClient, imdbId);
+  } = useQuery({
+    ...movieByImdbIdQuery(imdbId),
+    enabled: !!imdbId,
+    initialData,
+  });
 
+  const queryClient = useQueryClient();
   const addReviewMutation = useAddReview(queryClient, imdbId);
 
-  return status === 'pending' ? (
+  return isPending ? (
     <PendingPage />
-  ) : status === 'error' ? (
+  ) : isError ? (
     <ErrorPage error={error.message} />
   ) : (
     <Box sx={{ flexGrow: 1, padding: { xs: 4, md: 6 } }}>

@@ -1,14 +1,31 @@
-import { useMovies } from '../../lib';
+import { useLoaderData } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+import { moviesQuery } from '../../lib';
 import { ErrorPage } from '..';
 import { PendingPage } from '..';
 import { Hero } from '..';
 
-export function Home() {
-  const { status, data: movies, error } = useMovies();
+import { loader } from './loader';
 
-  return status === 'pending' ? (
+export function Home() {
+  const initialData = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof loader>>
+  >;
+  // NB `status` returned from `useQuery` is missing `pending`, when using with React Router, therefore, using `isPending` as the workaround
+  const {
+    isPending,
+    isError,
+    data: movies,
+    error,
+  } = useQuery({
+    ...moviesQuery,
+    initialData,
+  });
+
+  return isPending ? (
     <PendingPage />
-  ) : status === 'error' ? (
+  ) : isError ? (
     <ErrorPage error={error.message} />
   ) : (
     <Hero movies={movies} />

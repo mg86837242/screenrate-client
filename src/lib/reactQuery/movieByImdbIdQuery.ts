@@ -1,5 +1,3 @@
-import { FetchQueryOptions, UseQueryOptions } from '@tanstack/react-query';
-
 import { Movie } from '../../common';
 import { api } from '..';
 
@@ -8,19 +6,16 @@ async function getMovieByImdbId(imdbId: string): Promise<Movie> {
   return response.data;
 }
 
-export const movieByImdbIdQuery = (
-  imdbId: string,
-): FetchQueryOptions | UseQueryOptions => ({
+export const movieByImdbIdQuery = (imdbId: string) => ({
   queryKey: ['movie', imdbId],
   queryFn: async () => {
     const movie = await getMovieByImdbId(imdbId);
     if (!movie) {
       throw new Response('', {
         status: 404,
-        statusText: 'Not Found',
+        statusText: `Uh oh, couldn't find a movie with imdbId "${imdbId}"`,
       });
     }
     return movie;
   },
-  enabled: !!imdbId,
 });
