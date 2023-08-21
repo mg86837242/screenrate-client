@@ -31,6 +31,7 @@ export function Reviews() {
     initialData,
   });
 
+  // NB `useMutation` i/o `useFetcher` for mutation w/o navigation, reasons: https://programmingarehard.com/2023/04/01/react-routers-data-utilities-are-awkward.html/
   const queryClient = useQueryClient();
   const addReviewMutation = useAddReview(queryClient, imdbId);
 
