@@ -19,7 +19,6 @@ interface Props {
 export function Hero({ movies }: Props) {
   const navigate = useNavigate();
 
-  // TODO stylize the <Box> within the map & <Card> & <CardMedia> components & etc.
   return (
     <Box bgcolor={'#000'}>
       <Carousel sx={{ pb: 2 }} navButtonsAlwaysVisible>
