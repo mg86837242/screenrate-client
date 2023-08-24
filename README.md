@@ -11,11 +11,12 @@ git clone https://github.com/mg86837242/screenrate-server
 npm install
 ```
 
-Install MongoDB Compass, create a new collection called `movies` and import dataset from the JSON file located in the `screenrate-server\data` directory
+Install MongoDB Compass, create new collections called `movies` and `reviews` and then import dataset from the JSON file located in the `screenrate-server\db` directory to their respective collections
 
-Make sure Java and Maven are installed
+Make sure Java and Maven are installed, for example, by using following commands:
 
 ```bash
+java --version
 mvn --version
 ```
 
@@ -28,7 +29,7 @@ git clone https://github.com/mg86837242/screenrate-client
 npm install
 ```
 
-Configure environment variables, referring to the `.env.example` file
+Configure environment variables for the frontend, referring to the `.env.example` file, then start the backend server at http://localhost:5173, if using Vite's default port number
 
 ```bash
 npm run dev
