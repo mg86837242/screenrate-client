@@ -67,6 +67,7 @@ export function ReviewList({ addReviewMutation, reviews, isFetching }: Props) {
         <React.Fragment key={addReviewMutation.submittedAt}>
           <ListItem alignItems='center' dense disableGutters sx={{ gap: 2 }}>
             <BtnPrimary
+              type='button'
               onClick={() => addReviewMutation.reset()}
               width='90px'
               height='30px'

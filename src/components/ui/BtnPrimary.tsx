@@ -12,17 +12,17 @@ interface Props {
 
 export function BtnPrimary({
   children,
-  type,
+  type = 'submit',
   onClick,
-  disabled,
+  disabled = false,
   width,
   height,
 }: Props) {
   return (
     <Button
-      type={type || 'button'}
+      type={type}
       onClick={onClick}
-      disabled={disabled || false}
+      disabled={disabled}
       variant='contained'
       color='primary'
       sx={{

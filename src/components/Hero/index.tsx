@@ -127,6 +127,7 @@ export function Hero({ movies }: Props) {
                     <StyledPlayCirCleIcon />
                   </RouterLink>
                   <BtnPrimary
+                    type='button'
                     onClick={() => navigate(`movies/${movie.imdbId}/reviews`)}
                   >
                     Reviews

@@ -34,7 +34,9 @@ export function NotFound() {
     >
       <StyledIllustration />
       <Typography variant='h3'>Page Not Found</Typography>
-      <BtnPrimary onClick={() => navigate(``)}>Go Home</BtnPrimary>
+      <BtnPrimary type='button' onClick={() => navigate(`/`)}>
+        Go Home
+      </BtnPrimary>
     </Box>
   );
 }

@@ -20,7 +20,9 @@ export function ErrorPage({ error }: { error: string }) {
       aria-label='Error message'
     >
       <Typography>{error}</Typography>
-      <BtnPrimary onClick={() => navigate(`/`)}>Go Home</BtnPrimary>
+      <BtnPrimary type='button' onClick={() => navigate(`/`)}>
+        Go Home
+      </BtnPrimary>
     </Box>
   );
 }

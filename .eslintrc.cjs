@@ -29,6 +29,9 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    // `simple-import-sort`: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
     // Personal preference:
     // naming convention: https://typescript-eslint.io/rules/camelcase & https://typescript-eslint.io/rules/naming-convention
     '@typescript-eslint/naming-convention': [
@@ -41,9 +44,6 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unused-vars': 0,
-    // `simple-import-sort`: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
-    'simple-import-sort/imports': 'warn',
-    'simple-import-sort/exports': 'warn',
   },
   overrides: [
     {

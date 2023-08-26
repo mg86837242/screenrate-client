@@ -105,11 +105,7 @@ export function ReviewForm({ addReviewMutation }: Props) {
             }}
           />
         </Box>
-        <BtnPrimary
-          type='submit'
-          disabled={addReviewMutation.isPending}
-          width='100%'
-        >
+        <BtnPrimary disabled={addReviewMutation.isPending} width='100%'>
           Submit
         </BtnPrimary>
       </Box>
