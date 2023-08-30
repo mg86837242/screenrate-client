@@ -2,7 +2,7 @@ import { Movie } from '../../common';
 import { api } from '..';
 
 async function getMovies(): Promise<Movie[]> {
-  const response = await api.get<Movie[]>(`movies`);
+  const response = await api.get<Movie[]>(`/movies`);
   return response.data;
 }
 

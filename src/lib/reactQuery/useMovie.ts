@@ -6,7 +6,7 @@ import { api } from '..';
 
 async function getMovieByImdbId(imdbId: string): Promise<Movie> {
   try {
-    const response = await api.get<Movie>(`movies/${imdbId}`);
+    const response = await api.get<Movie>(`/movies/${imdbId}`);
     return response.data;
   } catch (error) {
     throw new Error(getApiErrorMessage(error));

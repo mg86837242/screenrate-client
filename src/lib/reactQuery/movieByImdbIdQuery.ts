@@ -2,7 +2,7 @@ import { Movie } from '../../common';
 import { api } from '..';
 
 async function getMovieByImdbId(imdbId: string): Promise<Movie> {
-  const response = await api.get<Movie>(`movies/${imdbId}`);
+  const response = await api.get<Movie>(`/movies/${imdbId}`);
   return response.data;
 }
 

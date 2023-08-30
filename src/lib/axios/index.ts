@@ -5,6 +5,6 @@ export const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15_000,
+  // timeout: 20_000,
   // withCredentials: true; // enable this line when necessary, e.g. when using cross-origin server-side session
 });

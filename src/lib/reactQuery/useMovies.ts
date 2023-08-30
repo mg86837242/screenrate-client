@@ -6,7 +6,7 @@ import { api } from '..';
 
 async function getMovies(): Promise<Movie[]> {
   try {
-    const response = await api.get<Movie[]>(`movies`);
+    const response = await api.get<Movie[]>(`/movies`);
     return response.data;
   } catch (error) {
     throw new Error(getApiErrorMessage(error));
